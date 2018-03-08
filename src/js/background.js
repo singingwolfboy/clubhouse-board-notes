@@ -12,19 +12,50 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
         tabId = tabs[0].id;
         console.log("init from tabId", tabId);
+
+        chrome.identity.getAuthToken({ interactive: false }, token => {
+          chrome.tabs.sendMessage(tabId, {
+            command: "init",
+            authenticated: !!token
+          });
+        });
       });
       break;
 
     case "auth":
       sendResponse({ message: "requesting token" });
       chrome.identity.getAuthToken({ interactive: true }, token => {
-        chrome.tabs.sendMessage(tabId, { message: `token: ${token}` });
+        chrome.tabs.sendMessage(tabId, {
+          command: "auth",
+          authenticated: !!token
+        });
+      });
+      break;
+
+    case "clear":
+      sendResponse({ message: "clearing token" });
+      chrome.identity.getAuthToken({ interactive: false }, token => {
+        chrome.identity.removeCachedAuthToken({ token }, () => {
+          chrome.tabs.sendMessage(tabId, {
+            command: "clear",
+            authenticated: false
+          });
+        });
       });
       break;
 
     case "list":
       sendResponse({ message: "requesting spreadsheets" });
       chrome.identity.getAuthToken({ interactive: false }, token => {
+        if (!token) {
+          chrome.tabs.sendMessage(tabId, {
+            command: "list",
+            authenticated: false,
+            error: "not authenticated"
+          });
+          return;
+        }
+
         const headers = new Headers({
           Authorization: `Bearer ${token}`
         });
@@ -34,7 +65,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
           headers
         })
           .then(response => response.json())
-          .then(data => chrome.tabs.sendMessage(tabId, data));
+          .then(data =>
+            chrome.tabs.sendMessage(tabId, { command: "list", data })
+          );
       });
       break;
 
@@ -42,6 +75,15 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       const docId = "1L-bymAPujx1r_lLysKTNOiD7qdvxWeS8WSrcHxXeiTk";
       sendResponse({ message: "loading hardcoded spreadsheet" });
       chrome.identity.getAuthToken({ interactive: false }, token => {
+        if (!token) {
+          chrome.tabs.sendMessage(tabId, {
+            command: "load",
+            authenticated: false,
+            error: "not authenticated"
+          });
+          return;
+        }
+
         const headers = new Headers({
           Authorization: `Bearer ${token}`
         });
@@ -49,11 +91,16 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         const url = `https://sheets.googleapis.com/v4/spreadsheets/${docId}/values/${range}`;
         fetch(url, { headers })
           .then(response => response.json())
-          .then(data => chrome.tabs.sendMessage(tabId, data));
+          .then(data =>
+            chrome.tabs.sendMessage(tabId, { command: "load", data })
+          );
       });
       break;
 
     default:
-      sendResponse({ message: "hello from the background" });
+      sendResponse({
+        command: request.command,
+        message: "hello from the background"
+      });
   }
 });
