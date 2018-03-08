@@ -1,10 +1,22 @@
-console.info("Hello from the Chrome extension!");
-chrome.runtime.sendMessage({ command: "init" });
+import React from "react";
+import ReactDOM from "react-dom";
+import styled from "styled-components";
 
-const contentIsLoaded = (content) => {
-  const authBtn = document.createElement("button")
-  authBtn.appendChild(document.createTextNode("Auth"))
-  authBtn.addEventListener("click", onClick = event => {
+const NotesContainer = styled.div`
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100px;
+  background: white;
+  border-top: 1px solid #ccc;
+`;
+
+class App extends React.Component {
+  componentDidMount() {
+    chrome.runtime.sendMessage({ command: "init" });
+  }
+
+  handleAuthClick = event => {
     chrome.runtime.sendMessage({ command: "auth" }, response => {
       if (response) {
         console.log("message from backend:", response.message);
@@ -12,11 +24,9 @@ const contentIsLoaded = (content) => {
         console.error("oops, no message");
       }
     })
-  });
+  };
 
-  const listBtn = document.createElement("button")
-  listBtn.appendChild(document.createTextNode("List"))
-  listBtn.addEventListener("click", onClick = event => {
+  handleListClick = event => {
     chrome.runtime.sendMessage({ command: "list" }, response => {
       if (response) {
         console.log("message from backend:", response.message);
@@ -24,11 +34,9 @@ const contentIsLoaded = (content) => {
         console.error("oops, no message");
       }
     })
-  });
+  };
 
-  const loadBtn = document.createElement("button")
-  loadBtn.appendChild(document.createTextNode("Load"))
-  loadBtn.addEventListener("click", onClick = event => {
+  handleLoadClick = event => {
     chrome.runtime.sendMessage({ command: "load" }, response => {
       if (response) {
         console.log("message from backend:", response.message);
@@ -36,20 +44,22 @@ const contentIsLoaded = (content) => {
         console.error("oops, no message");
       }
     })
-  });
+  };
 
+  render() {
+    return (
+      <NotesContainer>
+        <button onClick={this.handleAuthClick}>Auth</button>
+        <button onClick={this.handleListClick}>List</button>
+        <button onClick={this.handleLoadClick}>Load</button>
+      </NotesContainer>
+    );
+  }
+}
+
+const contentIsLoaded = (content) => {
   const el = document.createElement("div");
-  el.id = "notes";
-  el.appendChild(authBtn);
-  el.appendChild(listBtn);
-  el.appendChild(loadBtn);
-  el.style.position = "absolute";
-  el.style.bottom = "0";
-  el.style.width = "100%";
-  el.style.height = "100px";
-  el.style.background = "white";
-  el.style.borderTop = "1px solid #ccc";
-
+  ReactDOM.render(<App />, el);
   content.appendChild(el);
 }
 
