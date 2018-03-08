@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import { createStore } from "redux";
 import App from "./App";
 import reducer from "./reducer";
-import { LOG_IN, LOG_OUT } from "./actions";
+import { LOG_IN, LOG_OUT, SPREADSHEET_REQ_START, SPREADSHEET_REQ_SUCCESS } from "./actions";
 
 const store = createStore(reducer);
 
@@ -33,10 +33,6 @@ const checkForContent = () => {
 checkForContent();
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  console.log("message from backend:", request);
-  if (request.authenticated === true) {
-    store.dispatch({ type: LOG_IN });
-  } else if (request.authenticated === false) {
-    store.dispatch({ type: LOG_OUT });
-  }
+  console.log(request);
+  store.dispatch(request);
 });

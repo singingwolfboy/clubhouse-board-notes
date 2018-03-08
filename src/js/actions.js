@@ -1,2 +1,4 @@
 export const LOG_IN = "LOG_IN";
 export const LOG_OUT = "LOG_OUT";
+export const SPREADSHEET_REQ_START = "SPREADSHEET_REQ_START";
+export const SPREADSHEET_REQ_SUCCESS = "SPREADSHEET_REQ_SUCCESS";

@@ -2,6 +2,13 @@ import "../img/icon16.png";
 import "../img/icon48.png";
 import "../img/icon128.png";
 
+import {
+  LOG_IN,
+  LOG_OUT,
+  SPREADSHEET_REQ_START,
+  SPREADSHEET_REQ_SUCCESS
+} from "./actions";
+
 // This is the tab that has Clubhouse running -- the page needs to call "init"
 // to set this value
 let tabId = null;
@@ -15,8 +22,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
         chrome.identity.getAuthToken({ interactive: false }, token => {
           chrome.tabs.sendMessage(tabId, {
-            command: "init",
-            authenticated: !!token
+            type: token ? LOG_IN : LOG_OUT
           });
         });
       });
@@ -26,8 +32,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       sendResponse({ message: "requesting token" });
       chrome.identity.getAuthToken({ interactive: true }, token => {
         chrome.tabs.sendMessage(tabId, {
-          command: "auth",
-          authenticated: !!token
+          type: token ? LOG_IN : LOG_OUT
         });
       });
       break;
@@ -37,8 +42,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       chrome.identity.getAuthToken({ interactive: false }, token => {
         chrome.identity.removeCachedAuthToken({ token }, () => {
           chrome.tabs.sendMessage(tabId, {
-            command: "clear",
-            authenticated: false
+            type: LOG_OUT
           });
         });
       });
@@ -48,14 +52,11 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       sendResponse({ message: "requesting spreadsheets" });
       chrome.identity.getAuthToken({ interactive: false }, token => {
         if (!token) {
-          chrome.tabs.sendMessage(tabId, {
-            command: "list",
-            authenticated: false,
-            error: "not authenticated"
-          });
+          chrome.tabs.sendMessage(tabId, { type: LOG_OUT });
           return;
         }
 
+        chrome.tabs.sendMessage(tabId, { type: SPREADSHEET_REQ_START });
         const headers = new Headers({
           Authorization: `Bearer ${token}`
         });
@@ -66,7 +67,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         })
           .then(response => response.json())
           .then(data =>
-            chrome.tabs.sendMessage(tabId, { command: "list", data })
+            chrome.tabs.sendMessage(tabId, { type: SPREADSHEET_REQ_SUCCESS, data })
           );
       });
       break;
@@ -76,11 +77,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       sendResponse({ message: "loading hardcoded spreadsheet" });
       chrome.identity.getAuthToken({ interactive: false }, token => {
         if (!token) {
-          chrome.tabs.sendMessage(tabId, {
-            command: "load",
-            authenticated: false,
-            error: "not authenticated"
-          });
+          chrome.tabs.sendMessage(tabId, { type: LOG_OUT });
           return;
         }
 
@@ -92,15 +89,12 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         fetch(url, { headers })
           .then(response => response.json())
           .then(data =>
-            chrome.tabs.sendMessage(tabId, { command: "load", data })
+            chrome.tabs.sendMessage(tabId, { type: SPREADSHEET_REQ_SUCCESS, data })
           );
       });
       break;
 
     default:
-      sendResponse({
-        command: request.command,
-        message: "hello from the background"
-      });
+      console.warn("Received an unknown request", request);
   }
 });
