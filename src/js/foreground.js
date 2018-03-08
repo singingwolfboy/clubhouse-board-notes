@@ -5,7 +5,12 @@ import { Provider } from "react-redux";
 import { createStore } from "redux";
 import App from "./App";
 import reducer from "./reducer";
-import { LOG_IN, LOG_OUT, SPREADSHEET_REQ_START, SPREADSHEET_REQ_SUCCESS } from "./actions";
+import {
+  LOG_IN,
+  LOG_OUT,
+  SPREADSHEET_REQ_START,
+  SPREADSHEET_REQ_SUCCESS
+} from "./actions";
 
 const store = createStore(reducer);
 

@@ -1,6 +1,7 @@
 {
   "name": "Notes for Clubhouse",
-  "description": "Keep notes on Clubhouse.io boards, synced to Google Sheets. This project is not affiliated with Clubhouse.",
+  "description":
+    "Keep notes on Clubhouse.io boards, synced to Google Sheets. This project is not affiliated with Clubhouse.",
   "author": "David Baumgold <david@davidbaumgold.com>",
   "version": "0.0.1",
   "icons": {
@@ -20,17 +21,18 @@
       "run_at": "document_idle"
     }
   ],
-  "permissions": [
-    "identity"
-  ],
+  "permissions": ["identity"],
   "oauth2": {
-    "client_id": "442496887730-r6v4iuu5saru1b16itfnbs532nml0j1r.apps.googleusercontent.com",
+    "client_id":
+      "442496887730-r6v4iuu5saru1b16itfnbs532nml0j1r.apps.googleusercontent.com",
     "scopes": [
       "https://www.googleapis.com/auth/drive.readonly",
       "https://www.googleapis.com/auth/spreadsheets.readonly"
     ]
   },
-  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmc/ZBXdGI0uKm+madvbTvXLwrVgJuTFTFTbWB88G/u2UbOYN0re0e1Zi9cNSe1aaPllJ/fJYtQrEHdCfiOA5O2Mqu3KlhxAf2QvvF+PhYqBUz5NjrpxHWPSC2FgcEo4UY5nXEcYpZdPqbBWpNo1Az1vQGDkgYOYt1Cy6HRwW5NEypel06M6t6Ji0b0EhfytouKiAukz69VX8zf8ToNFk93cFEYw3cLWPp1Htb7VnJzVJTujlhi/Vei2LhfqAN6m8vpScuSsJhRlI2pfng1Ua5XhRRxcJGjoneDrb26xJCiagzy1IoCoKu/zcXJqaC8O7CkVEUpGpKW53fV13CVnMJwIDAQAB",
+  "key":
+    "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmc/ZBXdGI0uKm+madvbTvXLwrVgJuTFTFTbWB88G/u2UbOYN0re0e1Zi9cNSe1aaPllJ/fJYtQrEHdCfiOA5O2Mqu3KlhxAf2QvvF+PhYqBUz5NjrpxHWPSC2FgcEo4UY5nXEcYpZdPqbBWpNo1Az1vQGDkgYOYt1Cy6HRwW5NEypel06M6t6Ji0b0EhfytouKiAukz69VX8zf8ToNFk93cFEYw3cLWPp1Htb7VnJzVJTujlhi/Vei2LhfqAN6m8vpScuSsJhRlI2pfng1Ua5XhRRxcJGjoneDrb26xJCiagzy1IoCoKu/zcXJqaC8O7CkVEUpGpKW53fV13CVnMJwIDAQAB",
   "minimum_chrome_version": "29",
-  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+  "content_security_policy":
+    "script-src 'self' 'unsafe-eval'; object-src 'self'"
 }

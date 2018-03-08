@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import styled from "styled-components";
+import { SPREADSHEET_REQ_START } from "./actions";
 
 class Spreadsheet extends React.Component {
   static propTypes = {
@@ -10,11 +11,9 @@ class Spreadsheet extends React.Component {
   };
 
   componentWillMount() {
-    chrome.runtime.sendMessage({ command: "load" }, response => {
+    chrome.runtime.sendMessage({ command: SPREADSHEET_REQ_START }, response => {
       if (response) {
         console.log("message from backend:", response.message);
-      } else {
-        console.error("oops, no message");
       }
     });
   }
@@ -25,11 +24,15 @@ class Spreadsheet extends React.Component {
       return "loading spreadsheet";
     }
     return (
-      <div>
-        <table>
-          {rows.map(row => <tr>{row.map(col => <td>{col}</td>)}</tr>)}
-        </table>
-      </div>
+      <table>
+        <tbody>
+          {rows.map((row, index) => (
+            <tr key={index}>
+              {row.map((col, cindex) => <td key={cindex}>{col}</td>)}
+            </tr>
+          ))}
+        </tbody>
+      </table>
     );
   }
 }

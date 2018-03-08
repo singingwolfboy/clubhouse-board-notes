@@ -32,7 +32,7 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         loading: false,
-        rows: action.data.values,
+        rows: action.data.values
       };
     default:
       return state;
