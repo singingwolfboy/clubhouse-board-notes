@@ -1,0 +1,30 @@
+{
+  "name": "notes-for-clubhouse",
+  "version": "0.0.1",
+  "description": "Keep notes on Clubhouse.io boards, synced to Google Sheets. This project is not affiliated with Clubhouse.",
+  "scripts": {
+    "build": "node utils/build.js",
+    "start": "node utils/webserver.js"
+  },
+  "dependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.17.0",
+    "babel-loader": "^6.2.4",
+    "babel-preset-react": "^6.16.0",
+    "clean-webpack-plugin": "^0.1.17",
+    "copy-webpack-plugin": "^4.2.0",
+    "css-loader": "^0.28.10",
+    "file-loader": "^0.11.2",
+    "fs-extra": "^0.30.0",
+    "html-loader": "^0.4.5",
+    "html-webpack-plugin": "3.0.6",
+    "style-loader": "^0.20.2",
+    "webpack": "^2.2.1",
+    "webpack-chrome-extension-reloader": "^0.7.0",
+    "webpack-dev-server": "^2.3.0",
+    "write-file-webpack-plugin": "3.4.2"
+  }
+}
