@@ -1,10 +1,11 @@
 {
   "name": "notes-for-clubhouse",
   "version": "0.0.1",
-  "description": "Keep notes on Clubhouse.io boards, synced to Google Sheets. This project is not affiliated with Clubhouse.",
+  "description":
+    "Keep notes on Clubhouse.io boards, synced to Google Sheets. This project is not affiliated with Clubhouse.",
   "scripts": {
-    "build": "node utils/build.js",
-    "start": "node utils/webserver.js"
+    "build": "webpack --mode production",
+    "start": "webpack-dev-server --mode development"
   },
   "dependencies": {
     "react": "^16.2.0",
@@ -28,6 +29,7 @@
     "react-svg-loader": "^2.1.0",
     "webpack": "^4.1.1",
     "webpack-chrome-extension-reloader": "^0.6.6",
+    "webpack-cli": "^2.0.10",
     "webpack-dev-server": "^3.1.0",
     "write-file-webpack-plugin": "3.4.2"
   }
