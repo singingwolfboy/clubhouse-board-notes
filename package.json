@@ -9,6 +9,8 @@
   "dependencies": {
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-redux": "^5.0.7",
+    "redux": "^3.7.2",
     "styled-components": "^3.2.1"
   },
   "devDependencies": {
@@ -24,6 +26,7 @@
     "fs-extra": "^0.30.0",
     "html-loader": "^0.4.5",
     "html-webpack-plugin": "3.0.6",
+    "react-svg-loader": "^2.1.0",
     "style-loader": "^0.20.2",
     "webpack": "^2.2.1",
     "webpack-chrome-extension-reloader": "^0.7.0",

@@ -30,11 +30,6 @@ var options = {
   module: {
     rules: [
       {
-        test: /\.css$/,
-        loader: "style-loader!css-loader",
-        exclude: /node_modules/
-      },
-      {
         test: new RegExp('\.(' + fileExtensions.join('|') + ')$'),
         loader: "file-loader?name=[name].[ext]",
         exclude: /node_modules/
@@ -43,6 +38,10 @@ var options = {
         test: /\.html$/,
         loader: "html-loader",
         exclude: /node_modules/
+      },
+      {
+        test: /\.svg$/,
+        use: ["babel-loader", "react-svg-loader"],
       },
       {
         test: /\.(js|jsx)$/,
@@ -73,21 +72,6 @@ var options = {
         }))
       }
     }]),
-    // new HtmlWebpackPlugin({
-    //   template: path.join(__dirname, "src", "popup.html"),
-    //   filename: "popup.html",
-    //   chunks: ["popup"]
-    // }),
-    // new HtmlWebpackPlugin({
-    //   template: path.join(__dirname, "src", "options.html"),
-    //   filename: "options.html",
-    //   chunks: ["options"]
-    // }),
-    // new HtmlWebpackPlugin({
-    //   template: path.join(__dirname, "src", "background.html"),
-    //   filename: "background.html",
-    //   chunks: ["background"]
-    // }),
     new WriteFilePlugin()
   ]
 };

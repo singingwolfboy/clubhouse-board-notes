@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import Spreadsheet from "./Spreadsheet";
 import { INIT, LOG_IN, LOG_OUT } from "./actions";
+import VerticalDots from "../img/vertical-dots.svg";
 
 const NotesContainer = styled.div`
   position: absolute;
@@ -12,6 +13,7 @@ const NotesContainer = styled.div`
   height: 100px;
   background: white;
   border-top: 1px solid #ccc;
+  overflow: auto;
 `;
 
 class App extends React.Component {
@@ -43,7 +45,7 @@ class App extends React.Component {
     return (
       <React.Fragment>
         <Spreadsheet />
-        <button onClick={this.handleLogOut}>Log Out</button>
+        <button onClick={this.handleLogOut}><VerticalDots /></button>
       </React.Fragment>
     );
   }
