@@ -20,7 +20,7 @@ class Spreadsheet extends React.Component {
   componentWillMount() {
     chrome.runtime.sendMessage({ command: SPREADSHEET_REQ_START }, response => {
       if (response) {
-        console.log("message from backend:", response.message);
+        // console.log("message from backend:", response.message);
       }
     });
   }

@@ -57,7 +57,7 @@ class MenuButton extends React.Component {
   handleReloadAction = () => {
     chrome.runtime.sendMessage({ command: SPREADSHEET_REQ_START }, response => {
       if (response) {
-        console.log("message from backend:", response.message);
+        // console.log("message from backend:", response.message);
       }
       this.setState({ showMenu: false });
     });
@@ -71,7 +71,7 @@ class MenuButton extends React.Component {
   handleLogOutAction = () => {
     chrome.runtime.sendMessage({ command: LOG_OUT }, response => {
       if (response) {
-        console.log("message from backend:", response.message);
+        // console.log("message from backend:", response.message);
       }
       this.setState({ showMenu: false });
     });

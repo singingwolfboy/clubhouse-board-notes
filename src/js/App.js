@@ -42,7 +42,7 @@ class App extends React.Component {
   handleLogIn = event => {
     chrome.runtime.sendMessage({ command: LOG_IN }, response => {
       if (response) {
-        console.log("message from backend:", response.message);
+        // console.log("message from backend:", response.message);
       }
     });
   };
@@ -50,7 +50,7 @@ class App extends React.Component {
   handleLogOut = event => {
     chrome.runtime.sendMessage({ command: LOG_OUT }, response => {
       if (response) {
-        console.log("message from backend:", response.message);
+        // console.log("message from backend:", response.message);
       }
     });
   };

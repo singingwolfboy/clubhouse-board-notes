@@ -38,6 +38,5 @@ const checkForContent = () => {
 checkForContent();
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  console.log(request);
   store.dispatch(request);
 });
