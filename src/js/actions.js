@@ -1,4 +1,6 @@
 export const INIT = "INIT";
+export const HIDE_APP = "HIDE_APP";
+export const SHOW_APP = "SHOW_APP";
 export const LOG_IN = "LOG_IN";
 export const LOG_OUT = "LOG_OUT";
 export const SPREADSHEET_REQ_START = "SPREADSHEET_REQ_START";

@@ -1,4 +1,6 @@
 import {
+  SHOW_APP,
+  HIDE_APP,
   LOG_IN,
   LOG_OUT,
   SPREADSHEET_REQ_START,
@@ -6,6 +8,7 @@ import {
 } from "./actions";
 
 const initialState = {
+  showApp: true,
   authenticated: false,
   loading: false,
   rows: []
@@ -13,6 +16,16 @@ const initialState = {
 
 function reducer(state = initialState, action) {
   switch (action.type) {
+    case SHOW_APP:
+      return {
+        ...state,
+        showApp: true
+      };
+    case HIDE_APP:
+      return {
+        ...state,
+        showApp: false
+      };
     case LOG_IN:
       return {
         ...state,

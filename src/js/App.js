@@ -11,6 +11,7 @@ const NotesContainer = styled.div`
   bottom: 0;
   height: 100px;
   min-width: 200px;
+  width: calc(100% - ${props => props.reduceWidth});
   background: white;
   border-top: 1px solid #ccc;
   overflow: auto;
@@ -18,11 +19,24 @@ const NotesContainer = styled.div`
 
 class App extends React.Component {
   static propTypes = {
+    show: PropTypes.bool,
     authenticated: PropTypes.bool
+  };
+
+  state = {
+    contentMargin: undefined
   };
 
   componentDidMount() {
     chrome.runtime.sendMessage({ command: INIT });
+
+    const ro = new ResizeObserver(entries => {
+      const entry = entries[0].target;
+      this.setState({ contentMargin: getComputedStyle(entry).marginLeft });
+    });
+    const content = document.querySelector("#content");
+    ro.observe(content);
+    this.setState({ contentMargin: getComputedStyle(content).marginLeft });
   }
 
   handleLogIn = event => {
@@ -60,9 +74,13 @@ class App extends React.Component {
   }
 
   render() {
-    const { authenticated } = this.props;
+    const { show, authenticated } = this.props;
+    if (!show) {
+      return null;
+    }
+
     return (
-      <NotesContainer>
+      <NotesContainer reduceWidth={this.state.contentMargin}>
         {authenticated ? this.renderLoggedIn() : this.renderLoggedOut()}
       </NotesContainer>
     );
@@ -70,6 +88,7 @@ class App extends React.Component {
 }
 
 const mapStateToProps = state => ({
+  show: state.showApp,
   authenticated: state.authenticated
 });
 

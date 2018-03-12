@@ -1,8 +1,7 @@
 {
   "name": "notes-for-clubhouse",
   "version": "0.0.1",
-  "description":
-    "Keep notes on Clubhouse.io boards, synced to Google Sheets. This project is not affiliated with Clubhouse.",
+  "description": "Keep notes on Clubhouse.io boards, synced to Google Sheets. This project is not affiliated with Clubhouse.",
   "scripts": {
     "build": "webpack --mode production",
     "start": "webpack-dev-server --mode development"
@@ -10,6 +9,7 @@
   "dependencies": {
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-popper": "^0.8.2",
     "react-redux": "^5.0.7",
     "redux": "^3.7.2",
     "styled-components": "^3.2.1"
