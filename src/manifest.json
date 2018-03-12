@@ -3,7 +3,7 @@
   "description":
     "Keep notes on Clubhouse.io boards, synced to Google Sheets. This project is not affiliated with Clubhouse.",
   "author": "David Baumgold <david@davidbaumgold.com>",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "icons": {
     "16": "icon16.png",
     "48": "icon48.png",
