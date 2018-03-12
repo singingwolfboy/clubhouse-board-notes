@@ -78,9 +78,12 @@ var options = {
         }
       }
     ]),
-    new WriteFilePlugin(),
-    new ChromeExtensionReloader()
+    new WriteFilePlugin()
   ]
 };
+
+if (process.env.NODE_ENV === "development") {
+  options.plugins.push(new ChromeExtensionReloader());
+}
 
 module.exports = options;
