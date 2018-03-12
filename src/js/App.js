@@ -4,13 +4,13 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import Spreadsheet from "./Spreadsheet";
 import { INIT, LOG_IN, LOG_OUT } from "./actions";
-import VerticalDots from "../img/vertical-dots.svg";
+import MenuButton from "./MenuButton";
 
 const NotesContainer = styled.div`
   position: absolute;
   bottom: 0;
-  width: 100%;
   height: 100px;
+  min-width: 200px;
   background: white;
   border-top: 1px solid #ccc;
   overflow: auto;
@@ -45,7 +45,7 @@ class App extends React.Component {
     return (
       <React.Fragment>
         <Spreadsheet />
-        <button onClick={this.handleLogOut}><VerticalDots /></button>
+        <MenuButton />
       </React.Fragment>
     );
   }

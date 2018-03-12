@@ -14,7 +14,6 @@ var fileExtensions = [
   "gif",
   "eot",
   "otf",
-  "svg",
   "ttf",
   "woff",
   "woff2"
@@ -32,11 +31,6 @@ var options = {
   module: {
     rules: [
       {
-        test: new RegExp(".(" + fileExtensions.join("|") + ")$"),
-        exclude: /node_modules/,
-        use: "file-loader?name=[name].[ext]"
-      },
-      {
         test: /\.html$/,
         loader: "html-loader",
         exclude: /node_modules/
@@ -49,6 +43,11 @@ var options = {
         test: /\.(js|jsx)$/,
         loader: "babel-loader",
         exclude: /node_modules/
+      },
+      {
+        test: new RegExp(".(" + fileExtensions.join("|") + ")$"),
+        exclude: /node_modules/,
+        use: "file-loader?name=[name].[ext]"
       }
     ]
   },
