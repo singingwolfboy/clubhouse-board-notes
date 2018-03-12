@@ -32,7 +32,7 @@
   },
   "key":
     "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmc/ZBXdGI0uKm+madvbTvXLwrVgJuTFTFTbWB88G/u2UbOYN0re0e1Zi9cNSe1aaPllJ/fJYtQrEHdCfiOA5O2Mqu3KlhxAf2QvvF+PhYqBUz5NjrpxHWPSC2FgcEo4UY5nXEcYpZdPqbBWpNo1Az1vQGDkgYOYt1Cy6HRwW5NEypel06M6t6Ji0b0EhfytouKiAukz69VX8zf8ToNFk93cFEYw3cLWPp1Htb7VnJzVJTujlhi/Vei2LhfqAN6m8vpScuSsJhRlI2pfng1Ua5XhRRxcJGjoneDrb26xJCiagzy1IoCoKu/zcXJqaC8O7CkVEUpGpKW53fV13CVnMJwIDAQAB",
-  "minimum_chrome_version": "29",
+  "minimum_chrome_version": "64",
   "content_security_policy":
     "script-src 'self' 'unsafe-eval'; object-src 'self'"
 }
