@@ -88,7 +88,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         const headers = new Headers({
           Authorization: `Bearer ${token}`
         });
-        const range = "B2:F10";
+        const range = "B2:F100";
         const url = `https://sheets.googleapis.com/v4/spreadsheets/${docId}/values/${range}`;
         fetch(url, { headers })
           .then(response => response.json())

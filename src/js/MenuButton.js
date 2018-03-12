@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { Manager, Target, Popper } from "react-popper";
-import { INIT, LOG_IN, LOG_OUT, HIDE_APP } from "./actions";
+import { LOG_OUT, HIDE_APP, SPREADSHEET_REQ_START } from "./actions";
 import VerticalDots from "../img/vertical-dots.svg";
 
 const Button = styled.button`
@@ -54,6 +54,15 @@ class MenuButton extends React.Component {
   toggleMenu = () =>
     this.setState(prevState => ({ showMenu: !prevState.showMenu }));
 
+  handleReloadAction = () => {
+    chrome.runtime.sendMessage({ command: SPREADSHEET_REQ_START }, response => {
+      if (response) {
+        console.log("message from backend:", response.message);
+      }
+      this.setState({ showMenu: false });
+    });
+  };
+
   handleCloseAction = () => {
     this.props.onCloseAction();
     this.setState({ showMenu: false });
@@ -71,6 +80,7 @@ class MenuButton extends React.Component {
   renderMenu() {
     return (
       <Menu>
+        <MenuItem onClick={this.handleReloadAction}>Reload</MenuItem>
         <MenuItem onClick={this.handleCloseAction}>Close</MenuItem>
         <MenuItem onClick={this.handleLogOutAction}>Log out</MenuItem>
       </Menu>
