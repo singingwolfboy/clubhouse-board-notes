@@ -7,6 +7,7 @@
     "start": "webpack-dev-server --mode development"
   },
   "dependencies": {
+    "luxon": "^0.5.6",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-popper": "^0.8.2",

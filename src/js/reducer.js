@@ -6,6 +6,12 @@ import {
   SPREADSHEET_REQ_START,
   SPREADSHEET_REQ_SUCCESS
 } from "./actions";
+import { maybeParseDate } from "./parsing";
+
+const cleanedSpreadsheetData = data =>
+  data.values
+    .filter(row => row.length > 0)
+    .map(row => row.map(cell => maybeParseDate(cell)));
 
 const initialState = {
   showApp: true,
@@ -45,7 +51,7 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         loading: false,
-        rows: action.data.values
+        rows: cleanedSpreadsheetData(action.data)
       };
     default:
       return state;
