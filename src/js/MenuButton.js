@@ -30,8 +30,10 @@ const Button = styled.button`
 const Menu = styled.ul`
   background-color: #fff;
   border: 1px solid black;
+  border-radius: 2px;
   list-style: none;
-  padding: 2px;
+  padding: 0;
+  margin: 0;
 `;
 
 const MenuItem = styled.li`
@@ -44,7 +46,7 @@ const MenuItem = styled.li`
 
 class MenuButton extends React.Component {
   static propTypes = {
-    onCloseAction: PropTypes.func,
+    onCloseAction: PropTypes.func
   };
 
   state = {
@@ -106,7 +108,7 @@ class MenuButton extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  onCloseAction: () => dispatch({ type: HIDE_APP }),
+  onCloseAction: () => dispatch({ type: HIDE_APP })
 });
 
 export default connect(null, mapDispatchToProps)(MenuButton);
