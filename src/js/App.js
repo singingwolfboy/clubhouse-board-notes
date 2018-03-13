@@ -30,13 +30,19 @@ class App extends React.Component {
   componentDidMount() {
     chrome.runtime.sendMessage({ command: INIT });
 
-    const ro = new ResizeObserver(entries => {
-      const entry = entries[0].target;
-      this.setState({ contentMargin: getComputedStyle(entry).marginLeft });
-    });
-    const content = document.querySelector("#content");
-    ro.observe(content);
-    this.setState({ contentMargin: getComputedStyle(content).marginLeft });
+    if (window.ResizeObserver) {
+      // only in Chrome 64 and above
+      const content = document.querySelector("#content");
+      const ro = new ResizeObserver(entries => {
+        const entry = entries[0].target;
+        this.setState({ contentMargin: getComputedStyle(entry).marginLeft });
+      });
+      ro.observe(content);
+      this.setState({ contentMargin: getComputedStyle(content).marginLeft });
+    } else {
+      // fallback for Chrome 63 and below
+      this.setState({ contentMargin: "284px" });
+    }
   }
 
   handleLogIn = event => {

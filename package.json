@@ -1,6 +1,6 @@
 {
   "name": "notes-for-clubhouse",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Keep notes on Clubhouse.io boards, synced to Google Sheets. This project is not affiliated with Clubhouse.",
   "scripts": {
     "build": "webpack --mode production",
