@@ -46,6 +46,7 @@ const MenuItem = styled.li`
 
 class MenuButton extends React.Component {
   static propTypes = {
+    authenticated: PropTypes.bool,
     onCloseAction: PropTypes.func
   };
 
@@ -80,11 +81,16 @@ class MenuButton extends React.Component {
   };
 
   renderMenu() {
+    const { authenticated } = this.props;
     return (
       <Menu>
-        <MenuItem onClick={this.handleReloadAction}>Reload</MenuItem>
         <MenuItem onClick={this.handleCloseAction}>Close</MenuItem>
-        <MenuItem onClick={this.handleLogOutAction}>Log out</MenuItem>
+        {authenticated && (
+          <MenuItem onClick={this.handleReloadAction}>Reload</MenuItem>
+        )}
+        {authenticated && (
+          <MenuItem onClick={this.handleLogOutAction}>Log out</MenuItem>
+        )}
       </Menu>
     );
   }
@@ -107,8 +113,12 @@ class MenuButton extends React.Component {
   }
 }
 
+const mapStateToProps = state => ({
+  authenticated: state.authenticated
+});
+
 const mapDispatchToProps = dispatch => ({
   onCloseAction: () => dispatch({ type: HIDE_APP })
 });
 
-export default connect(null, mapDispatchToProps)(MenuButton);
+export default connect(mapStateToProps, mapDispatchToProps)(MenuButton);

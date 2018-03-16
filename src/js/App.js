@@ -75,6 +75,7 @@ class App extends React.Component {
       <React.Fragment>
         You need to authenticate with Google, so we can load your notes.
         <button onClick={this.handleLogIn}>Log In</button>
+        <MenuButton />
       </React.Fragment>
     );
   }
