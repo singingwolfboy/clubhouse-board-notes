@@ -19,6 +19,7 @@ up on those actions.
 ## Google Integration
 
 This project stores data using [Google Sheets](https://www.google.com/sheets/about/),
-for ease of use and collaboration. When you first set up this extension,
-you'll be asked to select the Google Sheet you want to use to hold and manage
-this data.
+for ease of use and collaboration. Currently, one particular Google Sheet
+is hardcoded into the extension. In the future, it would be good to implement
+a sheet selector, so you can select which Google Sheet you want to use
+to hold and manage this data.
