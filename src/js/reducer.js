@@ -17,7 +17,7 @@ const initialState = {
   showApp: true,
   authenticated: false,
   loading: false,
-  rows: []
+  rows: undefined
 };
 
 function reducer(state = initialState, action) {

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { DateTime } from "luxon";
 import styled from "styled-components";
-import { SPREADSHEET_REQ_START } from "./actions";
+import { SPREADSHEET_REQ_START, HIDE_APP } from "./actions";
 
 const Table = styled.table`
   > thead > tr > th {
@@ -14,7 +14,8 @@ const Table = styled.table`
 class Spreadsheet extends React.Component {
   static propTypes = {
     loading: PropTypes.bool,
-    rows: PropTypes.array
+    rows: PropTypes.array,
+    hide: PropTypes.func.isRequired,
   };
 
   componentWillMount() {
@@ -26,13 +27,20 @@ class Spreadsheet extends React.Component {
   }
 
   render() {
-    const { loading, rows } = this.props;
+    const { loading, rows, hide } = this.props;
     if (loading) {
       return "loading spreadsheet";
     }
+    if (typeof rows === "undefined") {
+      return "not yet fetched";
+    }
 
-    const today = DateTime.local();
+    const today = DateTime.local().startOf("day");
     const relevant = rows.filter(row => row[0] <= today && row[1] >= today);
+    if (relevant.length === 0) {
+      setTimeout(hide, 2000);
+      return "No relevant notes";
+    }
     return (
       <Table>
         <thead>
@@ -59,4 +67,8 @@ const mapStateToProps = state => ({
   loading: state.loading
 });
 
-export default connect(mapStateToProps)(Spreadsheet);
+const mapDispatchToProps = dispatch => ({
+  hide: () => dispatch({ type: HIDE_APP })
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Spreadsheet);
