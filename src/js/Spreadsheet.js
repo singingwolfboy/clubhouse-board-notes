@@ -6,8 +6,17 @@ import styled from "styled-components";
 import { SPREADSHEET_REQ_START, HIDE_APP } from "./actions";
 
 const Table = styled.table`
+  font-size: 14px;
+  margin: 5px;
+
   > thead > tr > th {
     text-align: left;
+    padding-bottom: .5em;
+  }
+
+  > tbody > tr > td {
+    padding-right: 1em;
+    padding-bottom: .4em;
   }
 `;
 
