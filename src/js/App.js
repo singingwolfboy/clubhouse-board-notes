@@ -5,16 +5,21 @@ import styled from "styled-components";
 import Spreadsheet from "./Spreadsheet";
 import { INIT, LOG_IN, LOG_OUT } from "./actions";
 import MenuButton from "./MenuButton";
+import CloseButton from "./CloseButton";
 
 const NotesContainer = styled.div`
   position: absolute;
   bottom: 0;
-  height: 100px;
+  height: ${({ authenticated }) => authenticated ? "100px" : "25px"};
   min-width: 200px;
   width: calc(100% - ${props => props.reduceWidth});
   background: white;
   border-top: 1px solid #ccc;
   overflow: auto;
+`;
+
+const Padding = styled.span`
+  padding: 0 10px;
 `;
 
 class App extends React.Component {
@@ -71,12 +76,15 @@ class App extends React.Component {
   }
 
   renderLoggedOut() {
+    const { authenticated } = this.props;
     return (
-      <React.Fragment>
+      <Padding>
         You need to authenticate with Google, so we can load your notes.
-        <button onClick={this.handleLogIn}>Log In</button>
-        <MenuButton />
-      </React.Fragment>
+        <Padding>
+          <button onClick={this.handleLogIn}>Log In</button>
+        </Padding>
+        {authenticated ? <MenuButton /> : <CloseButton />}
+      </Padding>
     );
   }
 
@@ -87,7 +95,10 @@ class App extends React.Component {
     }
 
     return (
-      <NotesContainer reduceWidth={this.state.contentMargin}>
+      <NotesContainer
+        reduceWidth={this.state.contentMargin}
+        authenticated={authenticated}
+      >
         {authenticated ? this.renderLoggedIn() : this.renderLoggedOut()}
       </NotesContainer>
     );

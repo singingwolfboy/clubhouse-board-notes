@@ -6,7 +6,7 @@ import { Manager, Target, Popper } from "react-popper";
 import { LOG_OUT, HIDE_APP, SPREADSHEET_REQ_START } from "./actions";
 import VerticalDots from "../img/vertical-dots.svg";
 
-const Button = styled.button`
+export const Button = styled.button`
   position: absolute;
   top: 2px;
   right: 2px;
